@@ -5,7 +5,7 @@
     --slider-bg-color: #f06c64;
     --slider-shadow-bg-color: #ea676b;
     --our-services-bg-color: #f2f2f2;
-    --nav-color: #ffffff;
+    --white-color: #ffffff;
     --block-title-color: #666d89;
     --block-text-color: #767e9e;
     --wrapper-content-width: 1020px;
@@ -58,7 +58,7 @@ body {
 .logo>a {
     font-weight: 700;
     text-align: left;
-    color: var(--nav-color);
+    color: var(--white-color);
     text-decoration: none;
 }
 
@@ -87,7 +87,7 @@ body {
     text-decoration: none;
     font-size: 1.2rem;
     line-height: 0.6rem;
-    color: var(--nav-color);
+    color: var(--white-color);
     font-weight: 700;
     text-align: left;
     text-transform: uppercase;
@@ -196,7 +196,9 @@ body {
 /*our-services*/
 
 .our-services {
-    padding: 69px;
+    padding: 69px 0 37px;
+    background: var(--our-services-bg-color);
+    border-bottom: 6px solid var(--white-color);
 }
 
 .our-services__wrapper {
