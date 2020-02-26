@@ -1,0 +1,35 @@
+:root {
+    --header-bg-color: #2d303a;
+    --header-shadow-bg-color: #323746;
+    --nav-dot-color: #404455;
+    --slider-bg-color: #f06c64;
+    --slider-shadow-bg-color: #ea676b;
+    --our-services-bg-color: #f2f2f2;
+    --white-color: #ffffff;
+    --block-title-color: #666d89;
+    --block-text-color: #767e9e;
+    --wrapper-content-width: 1020px;
+    --font: 'Lato', Verdana, sans-serif;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 10px;
+}
+
+body {
+    font-size: 1.8rem;
+    font-family: var(--font);
+}
+
+.wrapper {
+    max-width: var(--wrapper-content-width);
+    margin: auto;
+}
