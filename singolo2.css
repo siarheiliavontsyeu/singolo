@@ -6,6 +6,8 @@
     --slider-shadow-bg-color: #ea676b;
     --our-services-bg-color: #f2f2f2;
     --white-color: #ffffff;
+    --portfolio-bg-color: #2d303a;
+    --portfolio-shadow-bg-color: #323746;
     --block-title-color: #666d89;
     --block-text-color: #767e9e;
     --wrapper-content-width: 1020px;
@@ -32,4 +34,154 @@ body {
 .wrapper {
     max-width: var(--wrapper-content-width);
     margin: auto;
+}
+
+.portfolio {
+    min-height: 870px;
+    background: var(--portfolio-bg-color);
+    padding: 67px 0 59px 0;
+    border-bottom: 6px solid var(--portfolio-shadow-bg-color);
+}
+
+.portfolio-wrapper {
+    padding: 0 40px;
+}
+
+.portfolio .description-block {
+    padding-bottom: 9px;
+    padding-top: 3px;
+}
+
+.portfolio__menu {
+    margin-bottom: 19px;
+}
+
+.menu {
+    list-style-type: none;
+}
+
+.menu__item {
+    display: inline-block;
+    margin-right: 5.4px;
+}
+
+.menu__link {
+    font-size: 1.2rem;
+    line-height: 2.2rem;
+    color: var(--block-text-color);
+    font-weight: 400;
+    text-align: left;
+    text-decoration: none;
+    padding: 2px 7px;
+    border: 1px solid var(--block-text-color);
+    border-radius: 4px;
+    letter-spacing: -0.12px;
+}
+
+.menu__link_active,
+.menu__link:hover {
+    color: var(--white-color);
+    border-color: var(--white-color);
+    transition-duration: 0.7s;
+}
+
+.portfolio__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-height: 600px;
+    overflow: hidden;
+}
+
+.portfolio__img {
+    margin-bottom: 16px;
+}
+
+.portfolio__img img:hover {
+    opacity: 0.3;
+    transition-duration: 0.7s;
+}
+
+
+/*About us*/
+
+.about-us {
+    min-height: 730px;
+    background: var(--our-services-bg-color);
+    padding: 69px 0 44px 0;
+    border-bottom: 6px solid var(--white-color);
+}
+
+.about-us-wrapper {
+    padding: 0 40px;
+}
+
+.about-us .description-block {
+    padding-bottom: 45px;
+}
+
+.profile {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.profile__item {
+    max-width: 300px;
+}
+
+.profile__avatar {
+    margin-bottom: 14px;
+}
+
+.profile__name {
+    font-size: 1.8rem;
+    line-height: 1.8rem;
+    color: var(--block-title-color);
+    font-weight: 900;
+    text-align: left;
+    margin-bottom: 9px;
+    letter-spacing: -0.27px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.profile__description {
+    font-size: 1.2rem;
+    line-height: 2.2rem;
+    color: var(--block-text-color);
+    font-weight: 400;
+    text-align: left;
+    letter-spacing: -0.02px;
+    margin-bottom: 17px;
+}
+
+
+/*social icons*/
+
+.profile__social {}
+
+.fa {
+    font-size: 17px;
+    width: 31px;
+    height: 31px;
+    line-height: 31px;
+    text-align: center;
+    text-decoration: none;
+    margin: 7px 3px 7px 2px;
+    border-radius: 50%;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook,
+.fa-twitter,
+.fa-google,
+.fa-linkedin {
+    background: transparent;
+    color: var(--block-title-color);
+    border: 1px solid var(--block-title-color);
 }

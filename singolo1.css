@@ -205,6 +205,10 @@ body {
     padding: 0px 40px;
 }
 
+.description-block {
+    padding-bottom: 40px;
+}
+
 .description-block__title {
     font-size: 3rem;
     line-height: 1.8rem;
@@ -222,7 +226,6 @@ body {
     font-weight: 300;
     text-align: left;
     letter-spacing: 0.15px;
-    margin-bottom: 40px;
 }
 
 .layout-3-column {
