@@ -10,6 +10,7 @@
     --portfolio-shadow-bg-color: #323746;
     --block-title-color: #666d89;
     --block-text-color: #767e9e;
+    --block-title-color-2: #f0d8d9;
     --input-bg: #d6564f;
     --input-text-color: #f48c8f;
     --wrapper-content-width: 1020px;
@@ -51,8 +52,13 @@ body {
 }
 
 .contact-us .description-block {
-    padding-bottom: 42px;
-    padding-top: 3px;
+    padding-bottom: 43px;
+    padding-top: 2px;
+}
+
+.contact-us .description-block__title,
+.contact-us .description-block__text {
+    color: var(--block-title-color-2);
 }
 
 .contact-us__container {
@@ -127,11 +133,62 @@ textarea {
 ::placeholder {
     color: var(--input-text-color);
     font-size: 1.2rem;
+    letter-spacing: -0.3px;
+    text-align: left;
+}
+
+textarea::placeholder {
+    word-spacing: -0.3rem;
 }
 
 .info {
-    max-width: 300px;
+    max-width: 310px;
     padding-left: 10px;
+}
+
+.info__title {
+    font-size: 1.8rem;
+    line-height: 1.8rem;
+    color: var(--block-title-color-2);
+    font-weight: 900;
+    text-align: left;
+    letter-spacing: -0.16px;
+    padding-top: 2px;
+}
+
+.info__description {
+    font-size: 1.2rem;
+    line-height: 2.2rem;
+    color: var(--block-title-color-2);
+    font-weight: 400;
+    text-align: justify;
+    letter-spacing: -0.16px;
+    margin: 10px 0 21px;
+}
+
+.info__contact,
+.info__contact a {
+    font-size: 1.2rem;
+    line-height: 2.2rem;
+    color: var(--block-title-color-2);
+    font-weight: 400;
+    text-align: left;
+}
+
+.info__contact a {
+    text-decoration: none;
+}
+
+.info__contact .fa {
+    font-size: 1.2rem;
+    width: 10px;
+    height: 10px;
+    line-height: 2.3rem;
+    margin: 0px 11px 0px 1px;
+}
+
+.fa.fa-phone {
+    transform: scaleX(-1);
 }
 
 
@@ -145,17 +202,35 @@ textarea {
     overflow: hidden;
 }
 
+.footer__wrapper {
+    padding: 0 40px;
+}
+
+.footer__container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer__copyright {
+    font-size: 1.2rem;
+    line-height: 1.7rem;
+    font-weight: 400;
+    margin-top: 6px;
+    letter-spacing: -0.16px;
+    color: var(--block-title-color);
+}
+
 
 /*Social icons*/
 
-.fa {
-    font-size: 17px;
+.footer__social .fa {
+    font-size: 1.7rem;
     width: 31px;
     height: 31px;
-    line-height: 31px;
+    line-height: 2.8rem;
     text-align: center;
     text-decoration: none;
-    margin: 7px 3px 7px 2px;
+    margin: 0px 3px 0px 2px;
     border-radius: 50%;
 }
 
