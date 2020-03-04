@@ -10,8 +10,10 @@
     --portfolio-shadow-bg-color: #323746;
     --block-title-color: #666d89;
     --block-text-color: #767e9e;
+    --input-bg: #d6564f;
+    --input-text-color: #f48c8f;
     --wrapper-content-width: 1020px;
-    --font: 'Lato', Verdana, sans-serif;
+    --font: "Lato", Verdana, sans-serif;
 }
 
 *,
@@ -39,7 +41,7 @@ body {
 .contact-us {
     min-height: 655px;
     background: var(--slider-bg-color);
-    padding: 67px 0 59px 0;
+    padding: 67px 0 0 0;
     border-bottom: 6px solid var(--slider-shadow-bg-color);
     overflow: hidden;
 }
@@ -49,7 +51,7 @@ body {
 }
 
 .contact-us .description-block {
-    padding-bottom: 9px;
+    padding-bottom: 42px;
     padding-top: 3px;
 }
 
@@ -59,15 +61,72 @@ body {
 }
 
 .form {
-    width: 620px;
+    max-width: 630px;
+    width: 630px;
     padding-right: 10px;
     display: flex;
     flex-direction: column;
 }
 
-.form input,
-.form textarea {
-    margin-bottom: 20px;
+input {
+    font-size: 1.2rem;
+    line-height: 3.8rem;
+    background: var(--input-bg);
+    color: var(--input-text-color);
+    max-width: 619px;
+    height: 39px;
+    padding: 0px 15px;
+    outline: none;
+    border: 0;
+    border-radius: 5px;
+    margin-bottom: 16px;
+}
+
+textarea {
+    font-size: 1.2rem;
+    line-height: 3.8rem;
+    background: var(--input-bg);
+    color: var(--input-text-color);
+    max-width: 619px;
+    height: 202px;
+    max-height: 202px;
+    padding: 0px 15px;
+    outline: none;
+    border: 0;
+    border-radius: 5px;
+    overflow: auto;
+    resize: none;
+    margin-bottom: 16px;
+}
+
+.form__submit {
+    padding: 0;
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+    background: var(--input-bg);
+    color: var(--input-text-color);
+    overflow: hidden;
+    max-width: 619px;
+    height: 39px;
+    line-height: 3.8rem;
+    cursor: pointer;
+    outline: none;
+    margin-bottom: 10px;
+}
+
+.form__submit:hover {
+    background: var(--header-shadow-bg-color);
+    opacity: 0.7;
+    color: var(--input-bg);
+    transition-duration: 0.3s;
+}
+
+::placeholder {
+    color: var(--input-text-color);
+    font-size: 1.2rem;
 }
 
 .info {
