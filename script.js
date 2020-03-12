@@ -1,6 +1,7 @@
 // navigation
 const HEADER = document.getElementById("header");
 const NAVIGATION = document.getElementById('navigation');
+const PHONES_ITEM = document.querySelectorAll('.phones__item');
 
 /* sticky header*/
 window.onscroll = function() {
@@ -13,7 +14,6 @@ window.onscroll = function() {
 
 /* navigation */
 NAVIGATION.addEventListener('click', (event) => {
-    console.log(event);
     event.preventDefault();
     // add/remove active class
     NAVIGATION.querySelectorAll('a').forEach(elem => {
@@ -29,3 +29,8 @@ NAVIGATION.addEventListener('click', (event) => {
         block: 'center'
     });
 });
+
+/*phones*/
+Array.from(PHONES_ITEM, el => el.addEventListener('click', e => {
+    event.target.parentNode.querySelector('.phone__screen').classList.toggle('phone__screen_off');
+}));

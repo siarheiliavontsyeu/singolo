@@ -195,6 +195,10 @@ body {
     left: 9px;
 }
 
+.phone__screen_off {
+    display: none;
+}
+
 .phones__item_horizontal {
     top: 173px;
     right: 96px;
