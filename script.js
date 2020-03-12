@@ -2,6 +2,7 @@
 const HEADER = document.getElementById("header");
 const NAVIGATION = document.getElementById('navigation');
 const PHONES_ITEM = document.querySelectorAll('.phones__item');
+const PORTFOLIO_IMG = document.querySelectorAll('.portfolio__img');
 
 /* sticky header*/
 window.onscroll = function() {
@@ -33,4 +34,13 @@ NAVIGATION.addEventListener('click', (event) => {
 /*phones*/
 Array.from(PHONES_ITEM, el => el.addEventListener('click', e => {
     event.target.parentNode.querySelector('.phone__screen').classList.toggle('phone__screen_off');
+}));
+
+/*portfolio*/
+Array.from(PORTFOLIO_IMG, el => el.addEventListener('click', e => {
+    event.preventDefault();
+    PORTFOLIO_IMG.forEach(elem => {
+        elem.classList.remove('portfolio__img_active');
+    });
+    event.target.closest('.portfolio__img').classList.toggle('portfolio__img_active');
 }));
