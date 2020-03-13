@@ -3,7 +3,6 @@ const HEADER = document.getElementById("header");
 const NAVIGATION = document.getElementById('navigation');
 const PHONES_ITEM = document.querySelectorAll('.phones__item');
 const PORTFOLIO_CONTAINER = document.querySelector('.portfolio__container');
-const PORTFOLIO_IMG = document.querySelectorAll('.portfolio__img');
 const PORTFOLIO__MENU = document.getElementById("portfolio__menu");
 
 function shuffleArr(arr) {
@@ -27,19 +26,21 @@ window.onscroll = function() {
 /* navigation */
 NAVIGATION.addEventListener('click', (event) => {
     event.preventDefault();
-    // add/remove active class
-    NAVIGATION.querySelectorAll('a').forEach(elem => {
-        elem.classList.remove('navigation__link_active');
-    });
-    event.target.tagName === 'A' && event.target.classList.add('navigation__link_active');
+    if (event.target.tagName === 'A') {
+        // add/remove active class
+        NAVIGATION.querySelectorAll('a').forEach(elem => {
+            elem.classList.remove('navigation__link_active');
+        });
+        event.target.classList.add('navigation__link_active');
 
-    //smooth scroll
-    const anchorID = event.target.tagName === 'A' && event.target.getAttribute('href').substr(1);
+        //smooth scroll
+        const anchorID = event.target.getAttribute('href').substr(1);
 
-    event.target.tagName === 'A' && document.getElementById(anchorID).scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-    });
+        document.getElementById(anchorID).scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+        });
+    }
 });
 
 /*phones*/
@@ -50,16 +51,25 @@ Array.from(PHONES_ITEM, el => el.addEventListener('click', event => {
 /*portfolio*/
 PORTFOLIO_CONTAINER.addEventListener('click', event => {
     event.preventDefault();
-    PORTFOLIO_IMG.forEach(elem => {
-        elem.classList.remove('portfolio__img_active');
-    });
-    event.target.tagName === 'IMG' && event.target.closest('.portfolio__img').classList.toggle('portfolio__img_active');
+    let PORTFOLIO_IMG = document.querySelectorAll('.portfolio__img');
+    if (event.target.tagName === 'IMG') {
+        PORTFOLIO_IMG.forEach(elem => {
+            elem.classList.remove('portfolio__img_active');
+        });
+        event.target.closest('.portfolio__img').classList.toggle('portfolio__img_active');
+    }
 });
 
 PORTFOLIO__MENU.addEventListener('click', event => {
     event.preventDefault();
+    let PORTFOLIO_IMG = document.querySelectorAll('.portfolio__img');
+
     // add/remove active class
     if (event.target.tagName === 'A') {
+        PORTFOLIO_IMG.forEach(elem => {
+            elem.classList.remove('portfolio__img_active');
+        });
+
         PORTFOLIO__MENU.querySelectorAll('a').forEach(elem => {
             elem.classList.remove('menu__link_active');
         });
