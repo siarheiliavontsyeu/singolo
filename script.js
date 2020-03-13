@@ -2,7 +2,9 @@
 const HEADER = document.getElementById("header");
 const NAVIGATION = document.getElementById('navigation');
 const PHONES_ITEM = document.querySelectorAll('.phones__item');
+const PORTFOLIO_CONTAINER = document.querySelector('.portfolio__container');
 const PORTFOLIO_IMG = document.querySelectorAll('.portfolio__img');
+
 
 /* sticky header*/
 window.onscroll = function() {
@@ -37,10 +39,10 @@ Array.from(PHONES_ITEM, el => el.addEventListener('click', e => {
 }));
 
 /*portfolio*/
-Array.from(PORTFOLIO_IMG, el => el.addEventListener('click', e => {
+PORTFOLIO_CONTAINER.addEventListener('click', event => {
     event.preventDefault();
     PORTFOLIO_IMG.forEach(elem => {
         elem.classList.remove('portfolio__img_active');
     });
-    event.target.closest('.portfolio__img').classList.toggle('portfolio__img_active');
-}));
+    event.target.tagName === 'IMG' && event.target.closest('.portfolio__img').classList.toggle('portfolio__img_active');
+});

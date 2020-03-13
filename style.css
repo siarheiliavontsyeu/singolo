@@ -375,7 +375,7 @@ body {
 }
 
 .portfolio__img_active {
-    border: 5px solid #F06C64;
+    border: 5px solid var(--slider-bg-color);
 }
 
 .portfolio__img img {
