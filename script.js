@@ -7,6 +7,10 @@ const BUTTON_OK = document.getElementById('button_ok');
 const FORM_SUBMIT = document.getElementById('form__submit');
 const MESSAGE_BOX = document.getElementById('message-box');
 
+const SLIDES = document.querySelectorAll('.slider__item');
+const SLIDER_BUTTON = document.querySelectorAll('.slider__button');
+
+
 function shuffleArr(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -48,6 +52,42 @@ NAVIGATION.addEventListener('click', (event) => {
 
     }
 });
+
+/*slider*/
+let slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(sliderNumber) {
+    showSlides(slideIndex += sliderNumber);
+}
+
+function showSlides(sliderNumber) {
+    if (sliderNumber > SLIDES.length) { slideIndex = 1 }
+    if (sliderNumber < 1) { slideIndex = SLIDES.length }
+
+    for (let i = 0; i < SLIDES.length; i++) {
+        SLIDES[i].style.display = 'none';
+    }
+    SLIDES[slideIndex - 1].style.display = 'block';
+    console.log(slideIndex);
+    if (slideIndex === 2) {
+        SLIDES[slideIndex - 1].closest('.slider').style.backgroundColor = '#648BF0';
+        SLIDES[slideIndex - 1].closest('.slider').style.borderColor = '#7e9be8';
+    } else {
+        SLIDES[slideIndex - 1].closest('.slider').style.backgroundColor = '#f06c64';
+        SLIDES[slideIndex - 1].closest('.slider').style.borderColor = '#ea676b';
+    }
+}
+
+Array.from(SLIDER_BUTTON, el => el.addEventListener('click', event => {
+    event.preventDefault();
+    if (event.target.classList.contains('slider__button_arrow-left')) {
+        plusSlides(-1);
+    } else if (event.target.classList.contains('slider__button_arrow-right')) {
+        plusSlides(1);
+    }
+}));
+
 
 /*phones*/
 Array.from(PHONES_ITEM, el => el.addEventListener('click', event => {

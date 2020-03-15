@@ -217,6 +217,26 @@ body {
     top: -27px;
 }
 
+img.slider-img {
+    position: absolute;
+    top: 0;
+    left: -40px;
+}
+
+.fadeAnimation {
+    animation-name: fadeAnimation;
+    animation-duration: 2s;
+}
+
+@keyframes fadeAnimation {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 
 /*our-services*/
 
