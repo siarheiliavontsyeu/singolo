@@ -18,7 +18,7 @@ function shuffleArr(arr) {
 
 /* sticky header*/
 window.onscroll = function() {
-    if (window.pageYOffset > 0) {
+    if (window.pageYOffset > 1) {
         HEADER.classList.add('header_sticky');
     } else {
         HEADER.classList.remove('header_sticky');
@@ -40,7 +40,7 @@ NAVIGATION.addEventListener('click', (event) => {
 
         document.getElementById(anchorID).scrollIntoView({
             behavior: 'smooth',
-            block: 'center'
+            block: 'start'
         });
     }
 });
