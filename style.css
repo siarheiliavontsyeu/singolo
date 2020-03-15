@@ -664,3 +664,29 @@ textarea::placeholder {
     color: var(--block-title-color);
     border: 1px solid var(--block-title-color);
 }
+
+
+/*modal*/
+
+.message-box {
+    position: fixed;
+    z-index: 999;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: #0008;
+}
+
+.message-box.hidden {
+    /* display: none; */
+}
+
+.message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 2px solid black;
+    text-align: center;
+}
