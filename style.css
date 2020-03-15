@@ -679,14 +679,51 @@ textarea::placeholder {
 }
 
 .message-box.hidden {
-    /* display: none; */
+    display: none;
 }
 
 .message {
-    position: absolute;
-    top: 50%;
+    position: relative;
+    padding: 20px 0;
+    top: 10%;
     left: 50%;
     transform: translateX(-50%);
-    border: 2px solid black;
+    max-width: 350px;
+    height: auto;
+    border: 2px solid var(--our-services-bg-color);
     text-align: center;
+    background: var(--header-shadow-bg-color);
+    color: var(--white-color);
+    font-family: "Lato";
+    border-radius: 14px;
+}
+
+.message p {
+    word-wrap: break-word;
+    padding: 0 10px;
+}
+
+.button-container {
+    padding-top: 30px;
+}
+
+.button_ok {
+    padding: 0px 20px;
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+    background: var(--input-bg);
+    color: var(--white-color);
+    overflow: hidden;
+    line-height: 2.8rem;
+    cursor: pointer;
+    outline: none;
+}
+
+.button_ok:hover {
+    background: var(--input-text-color);
+    opacity: 0.7;
+    transition-duration: 0.3s;
 }

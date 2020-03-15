@@ -260,11 +260,11 @@
 
                         <input name="Email" class="form__email" type="email" required value="" placeholder="Email  (Required)">
 
-                        <input name="Subject" class="form_subject" type="text" value="" placeholder="Subject">
+                        <input name="Subject" class="form__subject" type="text" value="" placeholder="Subject">
 
                         <textarea name="Detail" class="form__detail" placeholder="Describe your project in detail..."></textarea>
 
-                        <input type="submit" value="submit" name="subscribe" class="form__submit">
+                        <input type="submit" value="submit" name="subscribe" class="form__submit" id="form__submit">
                     </form>
                     <div class="info">
                         <h4 class="info__title">Contact Information</h4>
@@ -297,10 +297,12 @@
 
     <div id="message-box" class="message-box hidden">
         <div id="message" class="message">
-            <p>Письмо отправлено</p>
-            <p id="message-subject" class="message__subject"></p>
+            <p>Письмо отправлено!</p><br>
+            <p id="message-subject" class="message__subject"></p><br>
             <p id="message-description" class="message__description"></p>
-            <button id="button_ok" class="button button_ok">OK</button>
+            <div class="button-container">
+                <button id="button_ok" class="button button_ok">OK</button>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>

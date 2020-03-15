@@ -1,9 +1,11 @@
-// navigation
 const HEADER = document.getElementById("header");
 const NAVIGATION = document.getElementById('navigation');
 const PHONES_ITEM = document.querySelectorAll('.phones__item');
 const PORTFOLIO_CONTAINER = document.querySelector('.portfolio__container');
 const PORTFOLIO__MENU = document.getElementById("portfolio__menu");
+const BUTTON_OK = document.getElementById('button_ok');
+const FORM_SUBMIT = document.getElementById('form__submit');
+const MESSAGE_BOX = document.getElementById('message-box');
 
 function shuffleArr(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
@@ -83,4 +85,43 @@ PORTFOLIO__MENU.addEventListener('click', event => {
             PORTFOLIO_CONTAINER.innerHTML += elem.outerHTML;
         });
     }
+});
+
+/*form*/
+FORM_SUBMIT.addEventListener('click', event => {
+    event.preventDefault();
+
+    const formName = document.querySelector('input[class=form__name]');
+    const formEmail = document.querySelector('input[class=form__email]');
+    const formSubject = document.querySelector('input[class=form__subject]');
+    const formDetail = document.querySelector('textarea[class=form__detail]');
+
+    if (formName.checkValidity() && formEmail.checkValidity()) {
+        let messageSubject = document.getElementById('message-subject');
+        let messageDescription = document.getElementById('message-description');
+
+        messageSubject.innerHTML = formSubject.value ? `Тема: ${formSubject.value}` : `Без темы`;
+        messageDescription.innerHTML = formDetail.value ? `Описание: ${formDetail.value}` : `Без описания`;
+
+        MESSAGE_BOX.classList.remove('hidden');
+    } else {
+        formName.reportValidity();
+        formEmail.reportValidity();
+    };
+});
+
+
+BUTTON_OK.addEventListener('click', event => {
+    event.preventDefault();
+    const formName = document.querySelector('input[class=form__name]');
+    const formEmail = document.querySelector('input[class=form__email]');
+    const formSubject = document.querySelector('input[class=form__subject]');
+    const formDetail = document.querySelector('textarea[class=form__detail]');
+
+    formName.value = '';
+    formEmail.value = '';
+    formSubject.value = '';
+    formDetail.value = '';
+
+    MESSAGE_BOX.classList.add('hidden');
 });
