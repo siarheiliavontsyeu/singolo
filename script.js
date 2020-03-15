@@ -18,7 +18,7 @@ function shuffleArr(arr) {
 
 /* sticky header*/
 window.onscroll = function() {
-    if (window.pageYOffset > 1) {
+    if (window.pageYOffset > 0) {
         HEADER.classList.add('header_sticky');
     } else {
         HEADER.classList.remove('header_sticky');
@@ -38,16 +38,22 @@ NAVIGATION.addEventListener('click', (event) => {
         //smooth scroll
         const anchorID = event.target.getAttribute('href').substr(1);
 
-        document.getElementById(anchorID).scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
+        // document.getElementById(anchorID).scrollIntoView({
+        //     behavior: 'smooth',
+        //     block: 'start'
+        // });
+        const y = document.getElementById(anchorID).getBoundingClientRect().top + window.pageYOffset - 50;
+
+        window.scrollTo({ top: y, behavior: 'smooth' });
+
     }
 });
 
 /*phones*/
 Array.from(PHONES_ITEM, el => el.addEventListener('click', event => {
-    event.target.parentNode.querySelector('.phone__screen').classList.toggle('phone__screen_off');
+    if (event.target.className !== 'phone__shadow') {
+        event.target.parentNode.querySelector('.phone__screen').classList.toggle('phone__screen_off');
+    }
 }));
 
 /*portfolio*/
@@ -100,8 +106,8 @@ FORM_SUBMIT.addEventListener('click', event => {
         let messageSubject = document.getElementById('message-subject');
         let messageDescription = document.getElementById('message-description');
 
-        messageSubject.innerHTML = formSubject.value ? `Тема: ${formSubject.value}` : `Без темы`;
-        messageDescription.innerHTML = formDetail.value ? `Описание: ${formDetail.value}` : `Без описания`;
+        messageSubject.innerHTML = formSubject.value ? `Subject: ${formSubject.value}` : `Without subject`;
+        messageDescription.innerHTML = formDetail.value ? `Description: ${formDetail.value}` : `Without description`;
 
         MESSAGE_BOX.classList.remove('hidden');
     } else {
@@ -118,10 +124,10 @@ BUTTON_OK.addEventListener('click', event => {
     const formSubject = document.querySelector('input[class=form__subject]');
     const formDetail = document.querySelector('textarea[class=form__detail]');
 
-    formName.value = '';
-    formEmail.value = '';
-    formSubject.value = '';
-    formDetail.value = '';
+    // formName.value = '';
+    // formEmail.value = '';
+    // formSubject.value = '';
+    // formDetail.value = '';
 
     MESSAGE_BOX.classList.add('hidden');
 });

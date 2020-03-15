@@ -256,13 +256,13 @@
                 </div>
                 <div class="contact-us__container">
                     <form class="form" action="#" method="POST">
-                        <input name="Name" class="form__name" type="text" required value="" placeholder="Name  (Required)">
+                        <input name="Name" class="form__name" type="text" maxlength="80" required value="" placeholder="Name  (Required)">
 
-                        <input name="Email" class="form__email" type="email" required value="" placeholder="Email  (Required)">
+                        <input name="Email" class="form__email" type="email" maxlength="80" required value="" placeholder="Email  (Required)">
 
-                        <input name="Subject" class="form__subject" type="text" value="" placeholder="Subject">
+                        <input name="Subject" class="form__subject" type="text" maxlength="80" value="" placeholder="Subject">
 
-                        <textarea name="Detail" class="form__detail" placeholder="Describe your project in detail..."></textarea>
+                        <textarea name="Detail" class="form__detail" maxlength="340" placeholder="Describe your project in detail..."></textarea>
 
                         <input type="submit" value="submit" name="subscribe" class="form__submit" id="form__submit">
                     </form>
@@ -297,7 +297,7 @@
 
     <div id="message-box" class="message-box hidden">
         <div id="message" class="message">
-            <p>Письмо отправлено!</p><br>
+            <p>The letter was sent!</p><br>
             <p id="message-subject" class="message__subject"></p><br>
             <p id="message-description" class="message__description"></p>
             <div class="button-container">
