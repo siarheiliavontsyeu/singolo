@@ -1,14 +1,14 @@
-const HEADER = document.getElementById("header");
-const NAVIGATION = document.getElementById('navigation');
-const PHONES_ITEM = document.querySelectorAll('.phones__item');
-const PORTFOLIO_CONTAINER = document.querySelector('.portfolio__container');
-const PORTFOLIO__MENU = document.getElementById("portfolio__menu");
-const BUTTON_OK = document.getElementById('button_ok');
-const FORM_SUBMIT = document.getElementById('form__submit');
-const MESSAGE_BOX = document.getElementById('message-box');
-
-const SLIDES = document.querySelectorAll('.slider__item');
-const SLIDER_BUTTON = document.querySelectorAll('.slider__button');
+const HEADER = document.getElementById("header"),
+    NAVIGATION = document.getElementById('navigation'),
+    PHONES_ITEM = document.querySelectorAll('.phones__item'),
+    PORTFOLIO_CONTAINER = document.querySelector('.portfolio__container'),
+    PORTFOLIO__MENU = document.getElementById("portfolio__menu"),
+    CONTACT_US_FORM = document.getElementById('contact-us-form'),
+    BUTTON_OK = document.getElementById('button_ok'),
+    FORM_SUBMIT = document.getElementById('form__submit'),
+    MESSAGE_BOX = document.getElementById('message-box'),
+    SLIDES = document.querySelectorAll('.slider__item'),
+    SLIDER_BUTTON = document.querySelectorAll('.slider__button');
 
 
 function shuffleArr(arr) {
@@ -137,12 +137,12 @@ PORTFOLIO__MENU.addEventListener('click', event => {
 FORM_SUBMIT.addEventListener('click', event => {
     event.preventDefault();
 
-    const formName = document.querySelector('input[class=form__name]');
-    const formEmail = document.querySelector('input[class=form__email]');
-    const formSubject = document.querySelector('input[class=form__subject]');
-    const formDetail = document.querySelector('textarea[class=form__detail]');
+    const formName = document.querySelector('input[class=form__name]'),
+        formEmail = document.querySelector('input[class=form__email]'),
+        formSubject = document.querySelector('input[class=form__subject]'),
+        formDetail = document.querySelector('textarea[class=form__detail]');
 
-    if (formName.checkValidity() && formEmail.checkValidity()) {
+    if (CONTACT_US_FORM.checkValidity()) {
         let messageSubject = document.getElementById('message-subject');
         let messageDescription = document.getElementById('message-description');
 
@@ -151,23 +151,14 @@ FORM_SUBMIT.addEventListener('click', event => {
 
         MESSAGE_BOX.classList.remove('hidden');
     } else {
-        formName.reportValidity();
-        formEmail.reportValidity();
+        CONTACT_US_FORM.reportValidity();
     };
 });
 
 
 BUTTON_OK.addEventListener('click', event => {
     event.preventDefault();
-    const formName = document.querySelector('input[class=form__name]');
-    const formEmail = document.querySelector('input[class=form__email]');
-    const formSubject = document.querySelector('input[class=form__subject]');
-    const formDetail = document.querySelector('textarea[class=form__detail]');
-
-    // formName.value = '';
-    // formEmail.value = '';
-    // formSubject.value = '';
-    // formDetail.value = '';
+    CONTACT_US_FORM.reset();
 
     MESSAGE_BOX.classList.add('hidden');
 });

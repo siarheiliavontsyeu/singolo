@@ -569,6 +569,16 @@ textarea::placeholder {
     word-spacing: -0.3rem;
 }
 
+input:focus:invalid,
+textarea:focus:invalid {
+    border: 2px solid red;
+}
+
+input:focus,
+textarea:focus {
+    border: 2px solid white;
+}
+
 .info {
     max-width: 310px;
     padding-left: 10px;
@@ -741,6 +751,8 @@ textarea::placeholder {
     line-height: 2.8rem;
     cursor: pointer;
     outline: none;
+    border: 0;
+    border-radius: 5px;
 }
 
 .button_ok:hover {
