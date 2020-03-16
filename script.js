@@ -40,18 +40,18 @@ NAVIGATION.addEventListener('click', (event) => {
         event.target.classList.add('navigation__link_active');
 
         //smooth scroll
-        const anchorID = event.target.getAttribute('href').substr(1);
-
-        // document.getElementById(anchorID).scrollIntoView({
+        const ANCHOR_ID = event.target.getAttribute('href').substr(1);
+        // document.getElementById(ANCHOR_ID).scrollIntoView({
         //     behavior: 'smooth',
         //     block: 'start'
         // });
-        const y = document.getElementById(anchorID).getBoundingClientRect().top + window.pageYOffset - 50;
+        const y = document.getElementById(ANCHOR_ID).getBoundingClientRect().top + window.pageYOffset - 50;
 
         window.scrollTo({ top: y, behavior: 'smooth' });
 
     }
 });
+
 
 /*slider*/
 let slideIndex = 1;
@@ -67,10 +67,11 @@ function showSlides(sliderNumber) {
 
     for (let i = 0; i < SLIDES.length; i++) {
         SLIDES[i].style.display = 'none';
+        SLIDES[i].classList.remove('slide-left');
+        SLIDES[i].classList.remove('slide-right');
     }
     SLIDES[slideIndex - 1].style.display = 'block';
-    console.log(slideIndex);
-    if (slideIndex === 2) {
+    if (slideIndex % 2 === 0) {
         SLIDES[slideIndex - 1].closest('.slider').style.backgroundColor = '#648BF0';
         SLIDES[slideIndex - 1].closest('.slider').style.borderColor = '#7e9be8';
     } else {
@@ -79,14 +80,18 @@ function showSlides(sliderNumber) {
     }
 }
 
-Array.from(SLIDER_BUTTON, el => el.addEventListener('click', event => {
+Array.from(SLIDER_BUTTON, el => el.addEventListener('click', slider));
+
+function slider(event) {
     event.preventDefault();
     if (event.target.classList.contains('slider__button_arrow-left')) {
         plusSlides(-1);
+        SLIDES.forEach(el => el.classList.add('slide-left'));
     } else if (event.target.classList.contains('slider__button_arrow-right')) {
         plusSlides(1);
+        SLIDES.forEach(el => el.classList.add('slide-right'));
     }
-}));
+}
 
 
 /*phones*/
