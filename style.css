@@ -132,6 +132,7 @@ body {
     min-height: 599px;
     background-color: var(--slider-bg-color);
     border-bottom: 6px solid var(--slider-shadow-bg-color);
+    overflow: hidden;
 }
 
 .slider__wrapper {
@@ -223,16 +224,34 @@ img.slider-img {
     left: -40px;
 }
 
-.fadeAnimation {
-    animation-name: fadeAnimation;
-    animation-duration: 2s;
+.slide-right {
+    animation-name: slide-right;
+    animation-duration: 1s;
 }
 
-@keyframes fadeAnimation {
+.slide-left {
+    animation-name: slide-left;
+    animation-duration: 1s;
+}
+
+@keyframes slide-right {
     from {
+        transform: translate(110%);
         opacity: 0;
     }
     to {
+        transform: none;
+        opacity: 1;
+    }
+}
+
+@keyframes slide-left {
+    from {
+        transform: translate(-110%);
+        opacity: 0;
+    }
+    to {
+        transform: none;
         opacity: 1;
     }
 }
