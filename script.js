@@ -1,5 +1,6 @@
 const HEADER = document.getElementById("header"),
     NAVIGATION = document.getElementById('navigation'),
+    MENU_ANCHORS = document.querySelectorAll('.menu-anchor'),
     PHONES_ITEM = document.querySelectorAll('.phones__item'),
     PORTFOLIO_CONTAINER = document.querySelector('.portfolio__container'),
     PORTFOLIO__MENU = document.getElementById("portfolio__menu"),
@@ -48,10 +49,25 @@ NAVIGATION.addEventListener('click', (event) => {
         const y = document.getElementById(ANCHOR_ID).getBoundingClientRect().top + window.pageYOffset - 50;
 
         window.scrollTo({ top: y, behavior: 'smooth' });
-
     }
 });
 
+const MENU_SITE_BLOCKS = {};
+
+Array.from(MENU_ANCHORS, el => {
+    MENU_SITE_BLOCKS[el.id] = el.offsetTop - 800;
+})
+
+
+window.addEventListener("scroll", (event) => {
+    let currentScrollPosition = document.body.scrollTop || document.documentElement.scrollTop;
+    for (let anchor in MENU_SITE_BLOCKS) {
+        if (MENU_SITE_BLOCKS[anchor] <= currentScrollPosition) {
+            document.querySelector('.navigation__link_active').classList.remove("navigation__link_active");
+            document.querySelector(`a[href*='${anchor}']`).classList.add("navigation__link_active");
+        }
+    }
+});
 
 /*slider*/
 let slideIndex = 1;
