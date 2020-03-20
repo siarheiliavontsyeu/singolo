@@ -76,9 +76,6 @@ body {
 .fa:hover {
   opacity: 0.7;
 }
-.fa .fa-phone {
-  transform: scaleX(-1);
-}
 
 .fa-facebook,
 .fa-twitter,
@@ -641,6 +638,9 @@ textarea:focus {
   height: 10px;
   line-height: 2.3rem;
   margin: 0px 11px 0px 1px;
+}
+.info__contact .fa-phone {
+  transform: scaleX(-1);
 }
 
 .footer {
