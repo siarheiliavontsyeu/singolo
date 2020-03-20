@@ -11,55 +11,78 @@ const HEADER = document.getElementById("header"),
     SLIDES = document.querySelectorAll('.slider__item'),
     SLIDER_BUTTON = document.querySelectorAll('.slider__button');
 
+const MENU_SITE_BLOCKS = {};
+let slideIndex = 1;
 
-function shuffleArr(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
+window.onload = function() {
+    //header changes
+    getMenuSiteBlocksOffsetTop();
+    addScrollPageHandler();
+
+    //navigation transitions
+    addNavigationTransitionHandler();
+
+    //slider
+    showSlides(slideIndex);
+    addSliderClickHandler();
+    addPhonesClickHandler();
+
+    //portfolio
+    addPortfolioImgClickHandler();
+    addPortfolioMenuClickHandler();
+
+    //form
+    addFormSubmitClickHandler();
+    addModalWindowButtonOkHandler();
 }
 
+// navigation
+const addScrollPageHandler = () => {
+    window.addEventListener('scroll', event => {
+        if (window.pageYOffset > 0) {
+            HEADER.classList.add('header_sticky');
+        } else {
+            HEADER.classList.remove('header_sticky');
+        }
+        changeActiveNavigationMenuOnScroll();
+    })
+}
 
-/* sticky header*/
-window.onscroll = function() {
-    if (window.pageYOffset > 0) {
-        HEADER.classList.add('header_sticky');
-    } else {
-        HEADER.classList.remove('header_sticky');
-    }
-};
+const addNavigationTransitionHandler = () => {
+    NAVIGATION.addEventListener('click', (event) => {
+        event.preventDefault();
+        const clickedElement = event.target;
+        if (clickedElement.tagName === 'A') {
+            removeActiveNavigationMenu();
+            addActiveNavigationMenu(clickedElement);
+            addSmoothScrolling(clickedElement);
+        }
+    });
+}
 
-/* navigation */
-NAVIGATION.addEventListener('click', (event) => {
-    event.preventDefault();
-    if (event.target.tagName === 'A') {
-        // add/remove active class
-        NAVIGATION.querySelectorAll('a').forEach(elem => {
-            elem.classList.remove('navigation__link_active');
-        });
-        event.target.classList.add('navigation__link_active');
+const removeActiveNavigationMenu = () => {
+    NAVIGATION.querySelectorAll('a').forEach(elem => {
+        elem.classList.remove('navigation__link_active');
+    });
+}
 
-        //smooth scroll
-        const ANCHOR_ID = event.target.getAttribute('href').substr(1);
-        // document.getElementById(ANCHOR_ID).scrollIntoView({
-        //     behavior: 'smooth',
-        //     block: 'start'
-        // });
-        const y = document.getElementById(ANCHOR_ID).getBoundingClientRect().top + window.pageYOffset - 50;
+const addActiveNavigationMenu = (clickedElement) => {
+    clickedElement.classList.add('navigation__link_active');
+}
 
-        window.scrollTo({ top: y, behavior: 'smooth' });
-    }
-});
+const addSmoothScrolling = (clickedElement) => {
+    const ANCHOR_ID = clickedElement.getAttribute('href').substr(1);
+    const y = document.getElementById(ANCHOR_ID).getBoundingClientRect().top + window.pageYOffset - 50;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+}
 
-const MENU_SITE_BLOCKS = {};
+const getMenuSiteBlocksOffsetTop = () => {
+    Array.from(MENU_ANCHORS, el => {
+        MENU_SITE_BLOCKS[el.id] = el.offsetTop - 800;
+    })
+}
 
-Array.from(MENU_ANCHORS, el => {
-    MENU_SITE_BLOCKS[el.id] = el.offsetTop - 800;
-})
-
-
-window.addEventListener("scroll", (event) => {
+const changeActiveNavigationMenuOnScroll = () => {
     let currentScrollPosition = document.body.scrollTop || document.documentElement.scrollTop;
     for (let anchor in MENU_SITE_BLOCKS) {
         if (MENU_SITE_BLOCKS[anchor] <= currentScrollPosition) {
@@ -67,17 +90,14 @@ window.addEventListener("scroll", (event) => {
             document.querySelector(`a[href*='${anchor}']`).classList.add("navigation__link_active");
         }
     }
-});
+}
 
-/*slider*/
-let slideIndex = 1;
-showSlides(slideIndex);
-
-function plusSlides(sliderNumber) {
+// slider
+const plusSlides = (sliderNumber) => {
     showSlides(slideIndex += sliderNumber);
 }
 
-function showSlides(sliderNumber) {
+const showSlides = (sliderNumber) => {
     if (sliderNumber > SLIDES.length) { slideIndex = 1 }
     if (sliderNumber < 1) { slideIndex = SLIDES.length }
 
@@ -96,9 +116,8 @@ function showSlides(sliderNumber) {
     }
 }
 
-Array.from(SLIDER_BUTTON, el => el.addEventListener('click', slider));
 
-function slider(event) {
+const slider = (event) => {
     event.preventDefault();
     if (event.target.classList.contains('slider__button_arrow-left')) {
         plusSlides(-1);
@@ -109,77 +128,134 @@ function slider(event) {
     }
 }
 
+const addSliderClickHandler = () => {
+    Array.from(SLIDER_BUTTON, el => el.addEventListener('click', slider));
+}
 
-/*phones*/
-Array.from(PHONES_ITEM, el => el.addEventListener('click', event => {
-    if (event.target.className !== 'phone__shadow') {
-        event.target.parentNode.querySelector('.phone__screen').classList.toggle('phone__screen_off');
-    }
-}));
 
-/*portfolio*/
-PORTFOLIO_CONTAINER.addEventListener('click', event => {
-    event.preventDefault();
+// phones
+const addPhonesClickHandler = () => {
+    Array.from(PHONES_ITEM, el => el.addEventListener('click', event => {
+        let clickedElement = event.target;
+        if (clickedElement.className !== 'phone__shadow') {
+            togglePhoneScreenDisplay(clickedElement);
+        }
+    }));
+}
+
+const togglePhoneScreenDisplay = (clickedElement) => {
+    clickedElement.parentNode.querySelector('.phone__screen').classList.toggle('phone__screen_off');
+}
+
+
+// portfolio
+const addPortfolioImgClickHandler = () => {
+    PORTFOLIO_CONTAINER.addEventListener('click', event => {
+        event.preventDefault();
+        let clickedElement = event.target;
+        if (clickedElement.tagName === 'IMG') {
+            removePortfolioActiveImages();
+            addPortfolioActiveImg(clickedElement);
+        }
+    });
+}
+
+const removePortfolioActiveImages = () => {
     let PORTFOLIO_IMG = document.querySelectorAll('.portfolio__img');
-    if (event.target.tagName === 'IMG') {
-        PORTFOLIO_IMG.forEach(elem => {
-            elem.classList.remove('portfolio__img_active');
-        });
-        event.target.closest('.portfolio__img').classList.toggle('portfolio__img_active');
-    }
-});
+    PORTFOLIO_IMG.forEach(elem => {
+        elem.classList.remove('portfolio__img_active');
+    });
+}
 
-PORTFOLIO__MENU.addEventListener('click', event => {
-    event.preventDefault();
-    let PORTFOLIO_IMG = document.querySelectorAll('.portfolio__img');
+const addPortfolioActiveImg = (clickedElement) => {
+    clickedElement.closest('.portfolio__img').classList.add('portfolio__img_active');
+}
 
-    // add/remove active class
-    if (event.target.tagName === 'A') {
-        PORTFOLIO_IMG.forEach(elem => {
-            elem.classList.remove('portfolio__img_active');
-        });
-
-        PORTFOLIO__MENU.querySelectorAll('a').forEach(elem => {
-            elem.classList.remove('menu__link_active');
-        });
-        event.target.tagName === 'A' && event.target.classList.add('menu__link_active');
-
+const addPortfolioMenuClickHandler = () =>
+    PORTFOLIO__MENU.addEventListener('click', event => {
+        event.preventDefault();
+        let PORTFOLIO_IMG = document.querySelectorAll('.portfolio__img');
         let arrImg = Array.from(PORTFOLIO_IMG);
-        PORTFOLIO_CONTAINER.innerHTML = '';
+        let clickedElement = event.target;
 
-        shuffleArr(arrImg).forEach(elem => {
-            // console.log(elem.outerHTML);
-            PORTFOLIO_CONTAINER.innerHTML += elem.outerHTML;
-        });
+        if (clickedElement.tagName === 'A') {
+            removePortfolioActiveImages();
+            removeActivePortfolioMenu();
+            addActivePortfolioMenu(clickedElement);
+            clearPortfolioContainer();
+            arrImg = shuffleArr(arrImg);
+            addShuffledPortfolioImages(arrImg);
+
+        }
+    });
+
+const removeActivePortfolioMenu = () => {
+    PORTFOLIO__MENU.querySelectorAll('a').forEach(elem => {
+        elem.classList.remove('menu__link_active');
+    });
+}
+
+const addActivePortfolioMenu = (clickedElement) => {
+    clickedElement.classList.add('menu__link_active');
+}
+
+const clearPortfolioContainer = () => {
+    PORTFOLIO_CONTAINER.innerHTML = '';
+}
+
+const addShuffledPortfolioImages = (arr) => {
+    arr.forEach(elem => {
+        PORTFOLIO_CONTAINER.innerHTML += elem.outerHTML;
+    });
+}
+
+const shuffleArr = (arr) => {
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
     }
-});
-
-/*form*/
-FORM_SUBMIT.addEventListener('click', event => {
-    event.preventDefault();
-
-    const formName = document.querySelector('input[class=form__name]'),
-        formEmail = document.querySelector('input[class=form__email]'),
-        formSubject = document.querySelector('input[class=form__subject]'),
-        formDetail = document.querySelector('textarea[class=form__detail]');
-
-    if (CONTACT_US_FORM.checkValidity()) {
-        let messageSubject = document.getElementById('message-subject');
-        let messageDescription = document.getElementById('message-description');
-
-        messageSubject.innerHTML = formSubject.value ? `Subject: ${formSubject.value}` : `Without subject`;
-        messageDescription.innerHTML = formDetail.value ? `Description: ${formDetail.value}` : `Without description`;
-
-        MESSAGE_BOX.classList.remove('hidden');
-    } else {
-        CONTACT_US_FORM.reportValidity();
-    };
-});
+    return arr;
+}
 
 
-BUTTON_OK.addEventListener('click', event => {
-    event.preventDefault();
-    CONTACT_US_FORM.reset();
+// form
+const addFormSubmitClickHandler = () => {
+    FORM_SUBMIT.addEventListener('click', event => {
+        event.preventDefault();
 
+
+
+        if (CONTACT_US_FORM.checkValidity()) {
+            fillModalWindow();
+            openModalWindow();
+        } else {
+            CONTACT_US_FORM.reportValidity();
+        };
+    });
+}
+
+const openModalWindow = () => {
+    MESSAGE_BOX.classList.remove('hidden');
+}
+
+const closeModalWindow = () => {
     MESSAGE_BOX.classList.add('hidden');
-});
+}
+
+const fillModalWindow = () => {
+    const formSubject = document.querySelector('input[class=form__subject]'),
+        formDetail = document.querySelector('textarea[class=form__detail]'),
+        messageSubject = document.getElementById('message-subject'),
+        messageDescription = document.getElementById('message-description');
+
+    messageSubject.innerHTML = formSubject.value ? `Subject: ${formSubject.value}` : `Without subject`;
+    messageDescription.innerHTML = formDetail.value ? `Description: ${formDetail.value}` : `Without description`;
+}
+
+const addModalWindowButtonOkHandler = () => {
+    BUTTON_OK.addEventListener('click', event => {
+        event.preventDefault();
+        CONTACT_US_FORM.reset();
+        closeModalWindow();
+    });
+}
