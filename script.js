@@ -9,7 +9,8 @@ const HEADER = document.getElementById("header"),
     FORM_SUBMIT = document.getElementById('form__submit'),
     MESSAGE_BOX = document.getElementById('message-box'),
     SLIDES = document.querySelectorAll('.slider__item'),
-    SLIDER_BUTTON = document.querySelectorAll('.slider__button');
+    SLIDER_BUTTON = document.querySelectorAll('.slider__button'),
+    HAMBURGER = document.getElementById('hamburger');
 
 const MENU_SITE_BLOCKS = {};
 let slideIndex = 1;
@@ -18,6 +19,7 @@ window.onload = function() {
     //header changes
     getMenuSiteBlocksOffsetTop();
     addScrollPageHandler();
+    addHamburgerClickHandler();
 
     //navigation transitions
     addNavigationTransitionHandler();
@@ -37,6 +39,13 @@ window.onload = function() {
 }
 
 // navigation
+const addHamburgerClickHandler = () => {
+    HAMBURGER.addEventListener('click', (event) => {
+        HAMBURGER.classList.toggle('hamburger_active');
+        NAVIGATION.classList.toggle('navigation_active');
+    });
+};
+
 const addScrollPageHandler = () => {
     window.addEventListener('scroll', event => {
         if (window.pageYOffset > 0) {
