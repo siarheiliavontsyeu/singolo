@@ -14,8 +14,10 @@
     <header class="header" id="header">
         <div class="wrapper">
             <div class="header__wrapper">
-                <span id="hamburger" class="header__hamburger hamburger"><span class="hamburger__line"></span></span>
-                <h1 class="logo"><a href="#">SINGOLO<span>*</span></a></h1>
+                <div class="header__tablet">
+                    <span id="hamburger" class="header__hamburger hamburger"><span class="hamburger__line"></span></span>
+                    <h1 class="logo"><a href="#">SINGOLO<span>*</span></a></h1>
+                </div>
                 <nav class="header__navigation">
                     <ul class="navigation" id="navigation">
                         <li class="navigation__item"><a href="#slider" class="navigation__link navigation__link_active">Home</a></li>
@@ -301,7 +303,7 @@
         </div>
     </footer>
 
-    <div id="message-box" class="message-box hidden">
+    <div id="overlay-box" class="overlay-box hidden">
         <div id="message" class="message">
             <p>The letter was sent!</p><br>
             <p id="message-subject" class="message__subject"></p><br>
@@ -312,6 +314,7 @@
         </div>
     </div>
     <script src="script.js"></script>
+    <!-- <div class="overlay-box"></div> -->
 </body>
 
 </html>
