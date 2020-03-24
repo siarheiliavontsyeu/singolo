@@ -9,10 +9,11 @@ const HEADER = document.getElementById("header"),
     CONTACT_US_FORM = document.getElementById('contact-us-form'),
     BUTTON_OK = document.getElementById('button_ok'),
     FORM_SUBMIT = document.getElementById('form__submit'),
-    MESSAGE_BOX = document.getElementById('overlay-box'),
+    MESSAGE_BOX = document.getElementById('message-box'),
     SLIDES = document.querySelectorAll('.slider__item'),
     SLIDER_BUTTON = document.querySelectorAll('.slider__button'),
-    HAMBURGER = document.getElementById('hamburger');
+    HAMBURGER = document.getElementById('hamburger'),
+    OVERLAY = document.getElementById('overlay');
 
 const MENU_SITE_BLOCKS = {};
 let slideIndex = 1;
@@ -48,8 +49,13 @@ const addHamburgerClickHandler = () => {
         toggleHeaderActive();
         toggleMenuActive();
         toggleHeaderTabletActive();
+        toggleOverlay();
     });
 };
+
+const toggleOverlay = () => {
+    OVERLAY.classList.toggle('hidden');
+}
 
 const toggleActiveHamburger = () => {
     HAMBURGER.classList.toggle('hamburger_active');
@@ -61,11 +67,6 @@ const toggleActiveNavigationMenu = () => {
 
 const toggleMenuActive = () => {
     HEADER_WRAPPER.classList.toggle('menu_active');
-    // if (HEADER_WRAPPER.classList.contains('menu_active')) {
-    //     disableScrollBody();
-    // } else {
-    //     enableScrollBody();
-    // };
 }
 
 const toggleHeaderTabletActive = () => {
@@ -125,6 +126,14 @@ const removeActiveNavigationMenu = () => {
 
 const addActiveNavigationMenu = (clickedElement) => {
     clickedElement.classList.add('navigation__link_active');
+    if (window.innerWidth < 768) {
+        toggleActiveHamburger();
+        toggleActiveNavigationMenu();
+        toggleHeaderActive();
+        toggleMenuActive();
+        toggleHeaderTabletActive();
+        toggleOverlay();
+    }
 }
 
 const smoothScrolling = (clickedElement) => {
@@ -244,7 +253,6 @@ const addPortfolioMenuClickHandler = () =>
             clearPortfolioContainer();
             arrImg = shuffleArr(arrImg);
             addShuffledPortfolioImages(arrImg);
-
         }
     });
 
@@ -281,8 +289,6 @@ const shuffleArr = (arr) => {
 const addFormSubmitClickHandler = () => {
     FORM_SUBMIT.addEventListener('click', event => {
         event.preventDefault();
-
-
 
         if (CONTACT_US_FORM.checkValidity()) {
             fillModalWindow();
