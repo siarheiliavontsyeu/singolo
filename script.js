@@ -42,6 +42,7 @@ window.onload = function() {
 }
 
 // navigation
+//hamburger menu
 const addHamburgerClickHandler = () => {
     HAMBURGER.addEventListener('click', (event) => {
         toggleActiveHamburger();
@@ -77,24 +78,7 @@ const toggleHeaderActive = () => {
     HEADER.classList.toggle('header_active');
 }
 
-const disableScrollBody = () => {
-    document.documentElement.style.margin = '0';
-    document.documentElement.style.height = '100%';
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.margin = '0';
-    document.body.style.height = '100%';
-    document.body.style.overflow = 'hidden';
-}
-
-const enableScrollBody = () => {
-    document.documentElement.style.margin = 'unset';
-    document.documentElement.style.height = 'unset';
-    document.documentElement.style.overflow = 'unset';
-    document.body.style.margin = 'unset';
-    document.body.style.height = 'unset';
-    document.body.style.overflow = 'unset';
-}
-
+//scroll
 const addScrollPageHandler = () => {
     window.addEventListener('scroll', event => {
         if (window.pageYOffset > 0) {
@@ -118,6 +102,7 @@ const addNavigationTransitionHandler = () => {
     });
 }
 
+//navigation menu
 const removeActiveNavigationMenu = () => {
     NAVIGATION.querySelectorAll('a').forEach(elem => {
         elem.classList.remove('navigation__link_active');
@@ -139,9 +124,7 @@ const addActiveNavigationMenu = (clickedElement) => {
 const smoothScrolling = (clickedElement) => {
     const ANCHOR_ID = clickedElement.getAttribute('href').substr(1);
     const y = document.getElementById(ANCHOR_ID).getBoundingClientRect().top + window.pageYOffset - 50;
-    // enableScrollBody();
     window.scrollTo({ top: y, behavior: 'smooth' });
-    // setTimeout(disableScrollBody, 1000);
 }
 
 const getMenuSiteBlocksOffsetTop = () => {
