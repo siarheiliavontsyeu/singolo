@@ -625,11 +625,16 @@ body {
 
 .slider-img {
   position: absolute;
-  top: 4vw;
+  top: 2vw;
   right: 50%;
   transform: translateX(50%);
   width: 100%;
   height: auto;
+}
+@media (max-width: 1019px) {
+  .slider-img {
+    top: 4vw;
+  }
 }
 
 .slide-right {
