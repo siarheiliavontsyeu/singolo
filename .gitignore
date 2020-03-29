@@ -1,1 +1,6 @@
 tmp/
+node_modules
+src
+style.css.map
+package-lock.json
+package.json
