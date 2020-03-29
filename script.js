@@ -1,4 +1,6 @@
 const HEADER = document.getElementById("header"),
+    HEADER_WRAPPER = document.querySelector('.header__wrapper'),
+    HEADER_TABLET = document.querySelector('.header__tablet'),
     NAVIGATION = document.getElementById('navigation'),
     MENU_ANCHORS = document.querySelectorAll('.menu-anchor'),
     PHONES_ITEM = document.querySelectorAll('.phones__item'),
@@ -9,7 +11,9 @@ const HEADER = document.getElementById("header"),
     FORM_SUBMIT = document.getElementById('form__submit'),
     MESSAGE_BOX = document.getElementById('message-box'),
     SLIDES = document.querySelectorAll('.slider__item'),
-    SLIDER_BUTTON = document.querySelectorAll('.slider__button');
+    SLIDER_BUTTON = document.querySelectorAll('.slider__button'),
+    HAMBURGER = document.getElementById('hamburger'),
+    OVERLAY = document.getElementById('overlay');
 
 const MENU_SITE_BLOCKS = {};
 let slideIndex = 1;
@@ -18,6 +22,7 @@ window.onload = function() {
     //header changes
     getMenuSiteBlocksOffsetTop();
     addScrollPageHandler();
+    addHamburgerClickHandler();
 
     //navigation transitions
     addNavigationTransitionHandler();
@@ -37,6 +42,43 @@ window.onload = function() {
 }
 
 // navigation
+//hamburger menu
+const addHamburgerClickHandler = () => {
+    HAMBURGER.addEventListener('click', (event) => {
+        toggleActiveHamburger();
+        toggleActiveNavigationMenu();
+        toggleHeaderActive();
+        toggleMenuActive();
+        toggleHeaderTabletActive();
+        toggleOverlay();
+    });
+};
+
+const toggleOverlay = () => {
+    OVERLAY.classList.toggle('hidden');
+}
+
+const toggleActiveHamburger = () => {
+    HAMBURGER.classList.toggle('hamburger_active');
+}
+
+const toggleActiveNavigationMenu = () => {
+    NAVIGATION.classList.toggle('navigation_active');
+}
+
+const toggleMenuActive = () => {
+    HEADER_WRAPPER.classList.toggle('menu_active');
+}
+
+const toggleHeaderTabletActive = () => {
+    HEADER_TABLET.classList.toggle('header__tablet_active');
+}
+
+const toggleHeaderActive = () => {
+    HEADER.classList.toggle('header_active');
+}
+
+//scroll
 const addScrollPageHandler = () => {
     window.addEventListener('scroll', event => {
         if (window.pageYOffset > 0) {
@@ -55,11 +97,12 @@ const addNavigationTransitionHandler = () => {
         if (clickedElement.tagName === 'A') {
             removeActiveNavigationMenu();
             addActiveNavigationMenu(clickedElement);
-            addSmoothScrolling(clickedElement);
+            smoothScrolling(clickedElement);
         }
     });
 }
 
+//navigation menu
 const removeActiveNavigationMenu = () => {
     NAVIGATION.querySelectorAll('a').forEach(elem => {
         elem.classList.remove('navigation__link_active');
@@ -68,9 +111,17 @@ const removeActiveNavigationMenu = () => {
 
 const addActiveNavigationMenu = (clickedElement) => {
     clickedElement.classList.add('navigation__link_active');
+    if (window.innerWidth < 768) {
+        toggleActiveHamburger();
+        toggleActiveNavigationMenu();
+        toggleHeaderActive();
+        toggleMenuActive();
+        toggleHeaderTabletActive();
+        toggleOverlay();
+    }
 }
 
-const addSmoothScrolling = (clickedElement) => {
+const smoothScrolling = (clickedElement) => {
     const ANCHOR_ID = clickedElement.getAttribute('href').substr(1);
     const y = document.getElementById(ANCHOR_ID).getBoundingClientRect().top + window.pageYOffset - 50;
     window.scrollTo({ top: y, behavior: 'smooth' });
@@ -185,7 +236,6 @@ const addPortfolioMenuClickHandler = () =>
             clearPortfolioContainer();
             arrImg = shuffleArr(arrImg);
             addShuffledPortfolioImages(arrImg);
-
         }
     });
 
@@ -222,8 +272,6 @@ const shuffleArr = (arr) => {
 const addFormSubmitClickHandler = () => {
     FORM_SUBMIT.addEventListener('click', event => {
         event.preventDefault();
-
-
 
         if (CONTACT_US_FORM.checkValidity()) {
             fillModalWindow();
